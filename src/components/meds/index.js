@@ -1,7 +1,7 @@
 // dependencies
 import React from 'react';
-// css
-import './style.css';
+// scss
+import './style.scss';
 
 export const Meds = () => {
     return (

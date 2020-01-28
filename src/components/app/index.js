@@ -4,8 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 // components
 import { SignIn, SignUp } from '../auth';
-// css
-import './style.css';
+// scss
+import './style.scss';
 
 export const App = () => {
     const [user, setUser] = useState(null);
@@ -43,6 +43,7 @@ export const App = () => {
     return (
         <Router>
             <div className='app'>
+                <SignUp user={user} updateUser={updateUser} />
             </div>
         </Router>
     )

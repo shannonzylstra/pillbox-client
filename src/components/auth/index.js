@@ -1,7 +1,7 @@
 // components
 import { SignIn } from './SignIn';
 import { SignUp } from './SignUp';
-// css
-import './style.css';
+// scss
+import './style.scss';
 // exports
 export { SignIn, SignUp };
