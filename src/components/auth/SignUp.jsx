@@ -1,6 +1,8 @@
 // dependencies
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+// material UI
+import { Paper, TextField } from '@material-ui/core/';
 
 export const SignUp = props => {
     // state declarations
@@ -54,6 +56,12 @@ export const SignUp = props => {
 
     return (
         <div className='sign-up'>
+            <Paper className='auth-box'>
+                <form className='auth-form' noValidate autoComplete='off'>
+                    <TextField className='auth-input' helperText='email' />
+                    <TextField className='auth-input' type='password' helperText='password' />
+                </form>
+            </Paper>
         </div>
     )
 };
