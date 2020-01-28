@@ -1,5 +1,5 @@
 // dependencies
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 // components
