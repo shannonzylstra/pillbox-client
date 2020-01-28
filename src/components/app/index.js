@@ -6,6 +6,7 @@ import { SignIn, SignUp } from '../auth';
 import './style.css';
 
 export const App = () => {
+    const [user, setUser] = useState(null);
     return (
         <div className='app'>
         </div>
