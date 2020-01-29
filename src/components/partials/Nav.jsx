@@ -32,7 +32,7 @@ const Nav = props => {
     links = (
       <span>
         <li>
-          <Link to="/login">Login</Link>
+          <Link to="/signin">Login</Link>
         </li>
         <li>
           <Link to="/signup">Signup</Link>
@@ -46,8 +46,8 @@ const Nav = props => {
       <ul>
         <li>
           <Link to="/">
-              <img src="/img/logo-white-3.png" height="30px" />
-              pillbox
+              <img src="/img/pills-solid.svg" height="30px" />
+              <span> PillBox</span>
           </Link>
         </li>
         {links}
