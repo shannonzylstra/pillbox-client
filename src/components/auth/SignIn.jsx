@@ -1,6 +1,9 @@
 // dependencies
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 
 export const SignIn = props => {
     
