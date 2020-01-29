@@ -19,7 +19,6 @@ export const SignIn = props => {
     
     // event handlers
     const handleSubmit = e => {
-        e.preventDefault();
         fetch(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {
             method: 'POST',
             body: JSON.stringify({
@@ -53,11 +52,11 @@ export const SignIn = props => {
     return (
         <div className='sign-in'>
             <Paper className='auth-box'>
-                <form className='auth-form' autoComplete='off' onSubmit={handleSubmit}>
+                <form className='auth-form' autoComplete='off'>
                     <TextField className='auth-input' helperText='email' name='email' onChange={e => setEmail(e.target.value)} />
                     <TextField className='auth-input' type='password' helperText='password' name='password' onChange={e => setPassword(e.target.value)} />
                     <br />
-                    <Button className='auth-button' type='submit' color='primary'>Sign Up</Button>
+                    <Button className='auth-button' color='primary' onClick={handleSubmit}>Sign Up</Button>
                 </form>
             </Paper>
         </div>
