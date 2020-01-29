@@ -54,12 +54,12 @@ export const App = () => {
 
                 <Route path = '/signup'
                     render={() => 
-                        <SignUp updateToken={updateUser} />
+                        <SignUp updateUser={updateUser} />
                     } />
 
                 <Route path='/signin'
                     render={() =>
-                        <SignIn updateToken={updateUser} />
+                        <SignIn updateUser={updateUser} />
                     } />
             </div>
         )
