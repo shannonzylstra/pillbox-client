@@ -1,0 +1,29 @@
+// pillbox
+.pillbox {
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pillbox-display {
+    margin: 0 auto;
+    height: 75vh;
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.pillbox-display-column-header {
+    height: 10vh;
+    width: 8vw;
+    border: 1px solid black;
+    text-align: center;
+}
+.pillbox-display-column-box {
+    height: 10vh;
+    width: 8vw;
+    border: 1px solid black;
+    text-align: center;
+}
