@@ -1,8 +1,12 @@
 // dependencies
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 // components
+import { Home } from '../home';
+import { Meds} from '../meds';
+import { Pillbox } from '../pillbox';
+import { Profile } from '../profile';
 import { SignIn, SignUp } from '../auth';
 // scss
 import './style.scss';
@@ -41,9 +45,37 @@ export const App = () => {
     };
 
     let content;
-    if (user) {
-        return (
-            
+    if (!user) {
+        content = (
+            <div className='content'>
+                <Route exact path='/' component={Home} />
+
+                <Route path = '/signup'
+                    render={() => 
+                        <SignUp updateToken={updateToken} />
+                    } />
+
+                <Route path='/signin'
+                    render={() =>
+                        <SignIn updateToken={updateToken} />
+                    } />
+            </div>
+        )
+    } else {
+        content = (
+            <div className='content'>
+                <Route exact path ='/' render={() => <Redirect to='/profile' /> } />
+
+                <Route path='/medication' component={Meds} />
+
+                <Route path='/pillbox' component={Pillbox} />
+
+                <Route path='/profile' component={Profile} />
+
+                <Route path='/signin' render={() => <Redirect to='/profile' /> } />
+
+                <Route path='/signup' render={() => <Redirect to='/profile' /> } />
+            </div>
         )
     }
 
