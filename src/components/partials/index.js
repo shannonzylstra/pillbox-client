@@ -1,6 +1,6 @@
 // components
 import { AddDoseModal } from './AddDoseModal';
-import { AddMedModal } from './AddMedModal';
+import AddMedModal from './AddMedModal';
 import { Footer } from './Footer';
 import { Header } from './Header';
 // scss
