@@ -54,12 +54,12 @@ export const App = () => {
 
                 <Route path = '/signup'
                     render={() => 
-                        <SignUp updateToken={updateUser} />
+                        <SignUp updateUser={updateUser} />
                     } />
 
                 <Route path='/signin'
                     render={() =>
-                        <SignIn updateToken={updateUser} />
+                        <SignIn updateUser={updateUser} />
                     } />
             </div>
         )
@@ -85,7 +85,8 @@ export const App = () => {
         <Router>
             <div className='app'>
                 <Nav updateUser={updateUser} user={user} />
-                {content}
+                {/* {content} */}
+                <Pillbox />
             </div>
         </Router>
     )
