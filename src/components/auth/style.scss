@@ -1,3 +1,4 @@
+@import '../../styles/palette.scss';
 // auth
 .auth-box {
     margin: 0 auto;
@@ -9,4 +10,7 @@
     height: 8vh;
     width: 25vw;
     text-align: center;
+}
+.auth-button {
+    color: $light-accent;
 }
