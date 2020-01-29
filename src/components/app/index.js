@@ -85,8 +85,7 @@ export const App = () => {
         <Router>
             <div className='app'>
                 <Nav updateUser={updateUser} user={user} />
-                {/* {content} */}
-                <Pillbox />
+                {content}
             </div>
         </Router>
     )
