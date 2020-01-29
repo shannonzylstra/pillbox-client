@@ -8,6 +8,8 @@ import { Meds} from '../meds';
 import { Pillbox } from '../pillbox';
 import { Profile } from '../profile';
 import { SignIn, SignUp } from '../auth';
+import Nav from '../partials/Nav'
+
 // scss
 import './style.scss';
 
@@ -82,6 +84,7 @@ export const App = () => {
     return (
         <Router>
             <div className='app'>
+                <Nav updateUser={updateUser} user={user} />
                 {content}
             </div>
         </Router>

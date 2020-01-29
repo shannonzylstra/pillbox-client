@@ -1,4 +1,7 @@
+// import sass from styles folder
 @import '../../styles/palette.scss';
+@import '../partials/style.scss';
+
 // app
 .app {
     min-height: 100vh;
