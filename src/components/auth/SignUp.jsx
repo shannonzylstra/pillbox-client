@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 // material UI
-import { Paper, TextField } from '@material-ui/core/';
+import { Button, Paper, TextField } from '@material-ui/core/';
+// scss
+import '../../styles/palette.scss';
 
 export const SignUp = props => {
     // state declarations
@@ -19,6 +21,7 @@ export const SignUp = props => {
     // event handlers
     const handleSubmit = e => {
         e.preventDefault();
+        console.log('submitting')
         // send user data to server
         fetch(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, {
             method: 'POST',
@@ -57,9 +60,12 @@ export const SignUp = props => {
     return (
         <div className='sign-up'>
             <Paper className='auth-box'>
-                <form className='auth-form' noValidate autoComplete='off'>
-                    <TextField className='auth-input' helperText='email' />
-                    <TextField className='auth-input' type='password' helperText='password' />
+                <form className='auth-form' autoComplete='off' onSubmit={handleSubmit}>
+                    <TextField className='auth-input' helperText='firstname' name='firstname' onChange={e => setFirstname = e.target.value}/>
+                    <TextField className='auth-input' helperText='lastname' name='lastname' onChange={e => setLastName = e.target.value} />
+                    <TextField className='auth-input' helperText='email' name='email' onChange={e => setEmail = e.target.value} />
+                    <TextField className='auth-input' type='password' helperText='password' name='password' onChange={e => setPassword = e.target.value} />
+                    <Button className='auth-button' type='submit' color='primary'>Sign Up</Button>
                 </form>
             </Paper>
         </div>

@@ -48,7 +48,13 @@ export const SignIn = props => {
 
     return (
         <div className='sign-in'>
-            
+            <Paper className='auth-box'>
+                <form className='auth-form' autoComplete='off' onSubmit={handleSubmit}>
+                    <TextField className='auth-input' helperText='email' name='email' onChange={e => setEmail = e.target.value} />
+                    <TextField className='auth-input' type='password' helperText='password' name='password' onChange={e => setPassword = e.target.value} />
+                    <Button className='auth-button' type='submit' color='primary'>Sign Up</Button>
+                </form>
+            </Paper>
         </div>
     )
 };

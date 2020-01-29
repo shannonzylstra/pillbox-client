@@ -40,10 +40,17 @@ export const App = () => {
         }
     };
 
+    let content;
+    if (user) {
+        return (
+            
+        )
+    }
+
     return (
         <Router>
             <div className='app'>
-                <SignUp user={user} updateUser={updateUser} />
+                {content}
             </div>
         </Router>
     )
