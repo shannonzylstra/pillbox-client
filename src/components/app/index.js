@@ -25,8 +25,10 @@ export const App = () => {
             // token to localStorage
             localStorage.setItem('mernToken', newToken);
             decodeToken(newToken);
+            console.log(newToken)
         } else {
             setUser(null);
+            console.log('nothing happening')
         }
     };
 

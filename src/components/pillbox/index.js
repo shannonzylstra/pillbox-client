@@ -1,5 +1,7 @@
 // dependencies
 import React from 'react';
+// components
+import { PillboxColumn } from './PillboxColumn';
 // material ui
 import Paper from '@material-ui/core/Paper';
 // scss
@@ -26,125 +28,13 @@ export const Pillbox = () => {
                         <h2>Night</h2>
                     </div>
                 </div>
-                <div className='pillbox-display-column'>
-                    <div className='pillbox-display-column-header'>
-                        <h1>Mon</h1>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>    
-                        <h2></h2>
-                    </div>
-                </div>
-                <div className='pillbox-display-column'>
-                    <div className='pillbox-display-column-header'>
-                        <h1>Tue</h1>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>    
-                        <h2></h2>
-                    </div>
-                </div>
-                <div className='pillbox-display-column'>
-                    <div className='pillbox-display-column-header'>
-                        <h1>Wed</h1>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>    
-                        <h2></h2>
-                    </div>
-                </div>
-                <div className='pillbox-display-column'>
-                    <div className='pillbox-display-column-header'>
-                        <h1>Thu</h1>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>    
-                        <h2></h2>
-                    </div>
-                </div>
-                <div className='pillbox-display-column'>
-                    <div className='pillbox-display-column-header'>
-                        <h1>Fri</h1>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>    
-                        <h2></h2>
-                    </div>
-                </div>
-                <div className='pillbox-display-column'>
-                    <div className='pillbox-display-column-header'>
-                        <h1>Sat</h1>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>    
-                        <h2></h2>
-                    </div>
-                </div>
-                <div className='pillbox-display-column'>
-                    <div className='pillbox-display-column-header'>
-                        <h1>Sun</h1>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>
-                        <h2></h2>
-                    </div>
-                    <div className='pillbox-display-column-box'>    
-                        <h2></h2>
-                    </div>
-                </div>
+                <PillboxColumn day='Mon' />
+                <PillboxColumn day='Tue' />
+                <PillboxColumn day='Wed' />
+                <PillboxColumn day='Thu' />
+                <PillboxColumn day='Fri' />
+                <PillboxColumn day='Sat' />
+                <PillboxColumn day='Sun' />
             </Paper>
         </div>
     )
