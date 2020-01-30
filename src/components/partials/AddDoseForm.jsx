@@ -5,21 +5,30 @@ import Button from '@material-ui/core/Button';
 const API_URL = 'http://localhost:3004/usermedications/doses'
 
 const NewDoseForm = props => {
-    let [days, setDays] = useState({})
+    let [days, setDays] = useState({
+        M: true,
+        T: true,
+        W: true,
+        Th: true,
+        F: true,
+        Sa: true,
+        S: true
+    })
     let [name, setName] = useState('')
     let [time, setTime] = useState('')
     let [food, setFood] = useState(false)
     let [dosage, setDosage] = useState('')
     let [instructions, setInstructions] = useState('')
+    let [checked, setChecked] = useState(true)
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.log('Submitted the form', {days, name, time, food, dosage, instructions})
-        
-        // TODO: figure out if I need to include createdAt, _id, etc.
+
+        // zoloft = 5e3237fff189414cda737696
+
         // Form the data
         let data = {
-            medication: '5e3092af0c10301b2bf7c791',
+            medication: '5e3237fff189414cda737696',
             days,
             name,
             time,
@@ -27,6 +36,8 @@ const NewDoseForm = props => {
             dosage,
             instructions
         }
+
+        console.log('Submitting the form', data)
 
         // Call the API
         let token = localStorage.getItem('mernToken')
@@ -53,9 +64,22 @@ const NewDoseForm = props => {
         })
     }
     
+    const updateCheck = (day, e) => {
+        if (checked) {
+            console.log(`checked is ${days[day]} but should be ${!checked}`)
+            setChecked(false)
+            return false
+        }
+        else {
+            console.log(`checked is ${checked} but should be ${!checked}`)
+            setChecked(true)
+            return true
+        }
+    }
+
     const updateDay = (day, e) => {
         let tempDays = {...days}
-        tempDays[day] = e.target.checked
+        tempDays[day] = updateCheck(day, e)
         setDays(tempDays)
     }
 
@@ -65,13 +89,13 @@ const NewDoseForm = props => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="days">Days:</label>
-                    <input type="checkbox" id="M" name="days" onChange={e => updateDay('M', e)} />
-                    <input type="checkbox" id="T" name="days" onChange={e => updateDay('T', e)} />
-                    <input type="checkbox" id="W" name="days" onChange={e => updateDay('W', e)} />
-                    <input type="checkbox" id="Th" name="days" onChange={e => updateDay('Th', e)} />
-                    <input type="checkbox" id="F" name="days" onChange={e => updateDay('F', e)} />
-                    <input type="checkbox" id="Sa" name="days" onChange={e => updateDay('Sa', e)} />
-                    <input type="checkbox" id="S" name="days" onChange={e => updateDay('S', e)} />
+                    <input type="checkbox" id="M" name="days" onChange={e => updateDay('M', e)} checked={days.M} />
+                    <input type="checkbox" id="T" name="days" onChange={e => updateDay('T', e)} checked={days.T} />
+                    <input type="checkbox" id="W" name="days" onChange={e => updateDay('W', e)} checked={days.W} />
+                    <input type="checkbox" id="Th" name="days" onChange={e => updateDay('Th', e)} checked={days.Th} />
+                    <input type="checkbox" id="F" name="days" onChange={e => updateDay('F', e)} checked={days.F} />
+                    <input type="checkbox" id="Sa" name="days" onChange={e => updateDay('Sa', e)} checked={days.Sa} />
+                    <input type="checkbox" id="S" name="days" onChange={e => updateDay('S', e)} checked={days.S} />
                 </div>
                 <div>
                     <label>Name:</label>
