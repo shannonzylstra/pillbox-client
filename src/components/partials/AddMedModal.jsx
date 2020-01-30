@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Styling
 import { makeStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
@@ -11,6 +11,9 @@ import Button from '@material-ui/core/Button';
 import CancelIcon from '@material-ui/icons/Cancel';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import TextField from '@material-ui/core/TextField';
 
 // Set up styling
@@ -316,33 +319,53 @@ const medications = [
 function SimpleDialog(props) {
   const classes = useStyles()
   const { close, open } = props
+  let [condition, setCondition] = useState('')
+  let [medication, setMedication] = useState('')
 
-  const handleClose = () => {
-    close()
+  const handleClose = () => close()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('Submitted', medication, condition)
+    let token = localStorage.getItem('mernToken')
+    console.log(token)
   }
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="dialog-title" open={open}>
       <DialogTitle id="dialog-title">Medication Quick Add</DialogTitle>
-      <Autocomplete
-        id="combo-box"
-        options={medications}
-        getOptionLabel={option => `${option.brand} (${option.generic})`}
-        style={{ width: 300 }}
-        renderInput={params => (
-            <TextField {...params} label="Available Meds" variant="outlined" fullWidth />
-        )}
-        />
-        <div className={classes.row}>
-          <Button color="primary" className={classes.spacer}>
-            <AddCircleIcon />
-            Add Med
-          </Button>
-          <Button onClick={handleClose} color="secondary">
-            <CancelIcon />
-            Cancel
-          </Button>
-        </div>
+      <form onSubmit={handleSubmit}>
+        <FormControl>
+          <Autocomplete
+            id="combo-box"
+            onChange={(event, value) => setMedication(value ? value.generic : '')}
+            options={medications}
+            getOptionLabel={option => `${option.brand} (${option.generic})`}
+            style={{ width: 300 }}
+            renderInput={params => (
+                <TextField {...params} label="Available Meds" variant="outlined" fullWidth />
+            )}
+            />
+          </FormControl>
+          <div>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="component-outlined">Condition</InputLabel>
+              <OutlinedInput id="component-outlined" value={condition} onChange={(e) => setCondition(e.target.value)} label="Condition" fullWidth />
+            </FormControl>
+          </div>
+          <FormControl>
+            <div className={classes.row}>
+              <Button type="submit" color="primary" className={classes.spacer}>
+                <AddCircleIcon />
+                Add Med
+              </Button>
+              <Button onClick={handleClose} color="secondary">
+                <CancelIcon />
+                Cancel
+              </Button>
+            </div>
+          </FormControl>
+        </form>
     </Dialog>
   )
 }

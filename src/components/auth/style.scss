@@ -1,9 +1,16 @@
 @import '../../styles/palette.scss';
 // auth
+.sign-up, .sign-in {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .auth-box {
     margin: 0 auto;
     height: 60vh;
     width: 30vw;
+    display: flex;
     text-align: center;
 }
 .auth-input {
