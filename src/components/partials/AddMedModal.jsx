@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // Styling
 import { makeStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
@@ -26,6 +26,9 @@ const useStyles = makeStyles(theme => ({
     color: blue[600],
     paddingLeft: '5px'
   },
+  red: {
+    color: '#f00'
+  },
   row: {
     textAlign: 'center'
   },
@@ -34,53 +37,65 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const medications = [{
-  brand: 'Tylenol',
-  generic: 'Acetamenophin'
-}, {
-  brand: 'Advil',
-  generic: 'Ibuprofen'
-}, {
-  brand: 'Codeine',
-  generic: 'Hydrocodone'
-}, {
-  brand: 'Midol',
-  generic: 'Ibuprofen / Aspirin'
-}, {
-  brand: 'Glucophage',
-  generic: 'Metformin'
-}, {
-  brand: 'Brilinta',
-  generic: 'Ticagrelor'
-}, {
-  brand: 'Dupixent',
-  generic: 'Dupilumab'
-}]
-
 function SimpleDialog(props) {
   const classes = useStyles()
   const { close, open } = props
+  let [error, setError] = useState('')
   let [condition, setCondition] = useState('')
   let [medication, setMedication] = useState('')
+
+  useEffect(() => {
+    setError('')
+  }, [condition, medication])
 
   const handleClose = () => close()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Submitted', medication, condition)
+
+    if (!medication || !condition) {
+      setError('Provide both an error and a medication')
+      return
+    }
+
     let token = localStorage.getItem('mernToken')
-    console.log(token)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/usermedications`, {
+      method: 'POST',
+      body: JSON.stringify({
+        medication,
+        condition
+      }),
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      response.json().then(result => {
+        if (response.ok) {
+          close() 
+        }
+        else {
+          setError(`${response.status} ${response.statusText}: ${result.message}`)
+        }
+      })
+      
+    })
+    .catch(err => {
+      setError(err)
+    })
   }
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="dialog-title" open={open}>
       <DialogTitle id="dialog-title">Medication Quick Add</DialogTitle>
+      <p className={classes.red}>{error}</p>
       <form onSubmit={handleSubmit}>
         <FormControl>
           <Autocomplete
             id="combo-box"
-            onChange={(event, value) => setMedication(value ? value.generic : '')}
-            options={medications}
+            onChange={(event, value) => setMedication(value ? value._id : '')}
+            options={props.medications}
             getOptionLabel={option => `${option.brand} (${option.generic})`}
             style={{ width: 300 }}
             renderInput={params => (
@@ -114,6 +129,7 @@ function SimpleDialog(props) {
 export default function AddMedModal() {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
+  const [medications, setMedications] = useState([])
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -123,8 +139,23 @@ export default function AddMedModal() {
     setOpen(false)
   }
 
-  // TODO: Implement useEffect to fetch the actual medications.
-  // Keep the medications array above as a default / fallback
+  // Implement useEffect to fetch the actual medications
+  useEffect(() => {
+    let token = localStorage.getItem('mernToken')
+    fetch(`${process.env.REACT_APP_SERVER_URL}/medications`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log('success', result)
+      setMedications(result.medications)
+    })
+    .catch(err => {
+      console.log('err', err)
+    })
+  }, [])
 
   return (
     <div>
@@ -134,7 +165,7 @@ export default function AddMedModal() {
         </Avatar>
         <span className={classes.blue}>New Medication</span>
       </Button>
-      <SimpleDialog open={open} close={handleClose} />
+      <SimpleDialog open={open} close={handleClose} medications={medications} />
     </div>
   )
 }
