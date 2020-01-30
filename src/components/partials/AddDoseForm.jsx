@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 
-const API_URL = 'http://localhost:3004/'
+const API_URL = 'http://localhost:3004/usermedications/doses'
 
 const NewDoseForm = props => {
     let [days, setDays] = useState({})
@@ -18,6 +18,7 @@ const NewDoseForm = props => {
         // TODO: figure out if I need to include createdAt, _id, etc.
         // Form the data
         let data = {
+            medication: '5e3092af0c10301b2bf7c791',
             days,
             name,
             time,
