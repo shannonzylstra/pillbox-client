@@ -79,6 +79,8 @@ export const App = () => {
                 <Route path='/signin' render={() => <Redirect to='/profile' /> } />
 
                 <Route path='/signup' render={() => <Redirect to='/profile' /> } />
+
+                <Route path='/test' render={Home} />
             </div>
         )
     }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const API_URL = 'http://localhost:3004/usermedications/doses'
 
@@ -28,11 +29,13 @@ const NewDoseForm = props => {
         }
 
         // Call the API
-        fetch(API_URL, {
+        let token = localStorage.getItem('mernToken')
+        fetch(`${process.env.REACT_APP_SERVER_URL}/usermedications/doses/`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         })
         .then(response => response.json())
@@ -61,7 +64,7 @@ const NewDoseForm = props => {
             <h2>Add New Dose</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label for="days">Days:</label>
+                    <label htmlFor="days">Days:</label>
                     <input type="checkbox" id="M" name="days" onChange={e => updateDay('M', e)} />
                     <input type="checkbox" id="T" name="days" onChange={e => updateDay('T', e)} />
                     <input type="checkbox" id="W" name="days" onChange={e => updateDay('W', e)} />
@@ -79,7 +82,7 @@ const NewDoseForm = props => {
                     <input name="time" value={time} onChange={e => setTime(e.target.value)} />
                 </div>
                 <div>
-                    <label for="food">Food:</label>
+                    <label htmlFor="food">Food:</label>
                     <input type="checkbox" id="food" name="food" onChange={e => setFood(e.target.checked)} />
                 </div>
                 <div>
@@ -97,8 +100,9 @@ const NewDoseForm = props => {
                         variant="outlined"
                     />
                 </div>
+                <br />
                 <div>
-                    <input type="submit" />
+                    <Button type="submit" variant="contained" color="primary">Add Dose</Button>
                 </div>
             </form>
         </div>
