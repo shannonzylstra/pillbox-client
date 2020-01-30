@@ -73,13 +73,13 @@ function SimpleDialog(props) {
     .then(response => {
       response.json().then(result => {
         if (response.ok) {
-          close() 
+          close()
         }
         else {
           setError(`${response.status} ${response.statusText}: ${result.message}`)
         }
       })
-      
+
     })
     .catch(err => {
       setError(err)
@@ -161,7 +161,7 @@ export default function AddMedModal() {
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
         <Avatar className={classes.blueAvatar}>
-          <AddIcon /> 
+          <AddIcon />
         </Avatar>
         <span className={classes.blue}>New Medication</span>
       </Button>
