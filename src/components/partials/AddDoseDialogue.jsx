@@ -288,7 +288,7 @@ function SimpleDialog(props) {
                             label="Instructions:"
                             multiline
                             rows="4"
-                            defaultValue="Rx"
+                            // defaultValue="Rx"
                             variant="outlined"
                         />
                     </FormControl>

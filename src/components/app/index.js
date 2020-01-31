@@ -9,6 +9,7 @@ import { Pillbox } from '../pillbox';
 import { Profile } from '../profile';
 import { SignIn, SignUp } from '../auth';
 import Nav from '../partials/Nav'
+import AddDoseDialogue from '../partials/AddDoseDialogue';
 
 // scss
 import './style.scss';
