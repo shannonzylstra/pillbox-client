@@ -5,7 +5,8 @@ import jwtDecode from 'jwt-decode';
 // components
 import { Home } from '../home';
 import { Doses } from '../doses';
-import { Meds} from '../meds';
+import { Medication } from '../medication';
+import { Meds } from '../meds';
 import { Pillbox } from '../pillbox';
 import { Profile } from '../profile';
 import { SignIn, SignUp } from '../auth';
@@ -73,7 +74,9 @@ export const App = () => {
 
                 <Route exact path ='/' render={() => <Redirect to='/profile' /> } />
 
-                <Route path='/medication' component={Meds} />
+                <Route path='/medication' component={Medication} />
+
+                <Route path='/meds' component={Meds} />
 
                 <Route path='/pillbox' component={Pillbox} />
 
