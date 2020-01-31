@@ -25,5 +25,8 @@
     height: 10vh;
     width: 8vw;
     border: 1px solid black;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
