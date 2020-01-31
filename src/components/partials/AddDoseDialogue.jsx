@@ -47,7 +47,7 @@ function SimpleDialog(props) {
     const classes = useStyles()
     const { close, open } = props
     let [error, setError] = useState('')
-    let [medication, setMedication] = useState('')
+    let [medication, setMedication] = useState({})
     let [days, setDays] = useState({
         M: true,
         T: true,
@@ -134,9 +134,10 @@ function SimpleDialog(props) {
                 <FormControl>
                     <Autocomplete
                         id="combo-box" 
-                        onChange={(event, value) => setMedication(value ? value : '')} 
-                        options={props.medications}
-                        getOptionsLabel={option => `${option.brand} (${option.generic})`} 
+                        onChange={(event, value) => setMedication(value ? value.medication._id : '')} 
+                        options={props.usermedications} // is this the problem....
+                        // options={[{"_id":"5e3237fff189414cda73768b","brand":"Tylenol with codeine","generic":"acetaminophen w/codeine","image":"/img/tylenol-with-codeine.JPG","link":"http://www.goodrx.com/tylenol-with-codeine","__v":0},{"_id":"5e3237fff189414cda737696","brand":"Zolofot","generic":"sertraline","image":"/img/zoloft.JPG","link":"http://www.goodrx.com/zolofot","__v":0}]}
+                        getOptionsLabel={option => `${option.medication.brand} (${option.generic})`} 
                         style={{ width: 500 }} 
                         renderInput={params => (
                             <TextField {...params} label="Your Medications" variant="outlined" fullWidth />
@@ -313,7 +314,7 @@ function SimpleDialog(props) {
 export default function AddDoseDialogue() {
     const classes = useStyles()
     const [open, setOpen] = React.useState(false)
-    const [medications, setMedications] = useState([])
+    const [usermedications, setUsermedications] = useState([])
 
     const handleClickOpen = () => {
         setOpen(true)
@@ -328,18 +329,19 @@ export default function AddDoseDialogue() {
         let token = localStorage.getItem('mernToken')
         fetch(`${process.env.REACT_APP_SERVER_URL}/usermedications`, {
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             }
         })
         .then(response => response.json())
         .then(result => {
-            console.log(result)
-            let meds = []
-            result.usermedications.forEach(med => {
-                meds.push(med.brand)
-            })
-            setMedications(meds)
+            // let usermedications = []
+            // result.usermedications.forEach(usermedication => {
+
+            //     medications.push(usermedication.medication)
+            // })
+            // console.log('medications',medications)
+            setUsermedications({ usermedications: result.usermedications })
+            console.log('usermedications', usermedications)
         })
         .catch(err => {
             console.log('err', err)
@@ -354,7 +356,7 @@ export default function AddDoseDialogue() {
                 </Avatar>
                 <span className={classes.blue}>Add Dose</span>
             </Button>
-            <SimpleDialog open={open} close={handleClose} medications={medications} />
+            <SimpleDialog open={open} close={handleClose} usermedications={usermedications} />
         </div>
     )
 }
