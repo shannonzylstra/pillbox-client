@@ -1,23 +1,39 @@
 @import '../../styles/palette.scss';
 // auth
-.sign-up, .sign-in {
-    height: 80vh;
+.auth {
+    height: 100vh;
+    width: 100vw;
     display: flex;
+    flex-direction: row;
+}
+.auth-left, .auth-right {
+    height: 100vh;
+    width: 50vw;
+}
+.auth-left {
+    background-color: $dark-shade;
+    color: $light-shade;
+    font-size: 3em;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.auth-box {
-    margin: 0 auto;
-    height: 60vh;
+.auth-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.signup-form {
+    height: 50vh;
     width: 30vw;
     display: flex;
-    text-align: center;
+    flex-direction: column;
+    justify-content: space-around;
 }
-.auth-input {
-    height: 8vh;
-    width: 25vw;
-    text-align: center;
-}
-.auth-button {
-    color: $light-accent;
+.auth-btn-cont {
+    margin-top: 1em;
+    width: 30vw;
+    text-align: right;
 }

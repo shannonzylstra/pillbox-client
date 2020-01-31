@@ -2,9 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 // material UI
-import { Button, Paper, TextField } from '@material-ui/core/';
+import { Button, TextField } from '@material-ui/core/';
 // scss
 import '../../styles/palette.scss';
+// fontawesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPills } from '@fortawesome/free-solid-svg-icons';
 
 export const SignUp = props => {
     // state declarations
@@ -58,17 +61,24 @@ export const SignUp = props => {
     }
 
     return (
-        <div className='sign-up'>
-            <Paper className='auth-box'>
-                <form className='auth-form' autoComplete='off' onSubmit={handleSubmit}>
-                    <TextField className='auth-input' helperText='firstname' name='firstname' onChange={e => setFirstname(e.target.value)}/>
-                    <TextField className='auth-input' helperText='lastname' name='lastname' onChange={e => setLastname(e.target.value)} />
-                    <TextField className='auth-input' helperText='email' name='email' onChange={e => setEmail(e.target.value)} />
-                    <TextField className='auth-input' type='password' helperText='password' name='password' onChange={e => setPassword(e.target.value)} />
-                    <br />
-                    <Button className='auth-button' type='submit' color='primary'>Sign Up</Button>
-                </form>
-            </Paper>
+        <div className='auth'>
+            <div className='auth-left'>
+                <FontAwesomeIcon icon={faPills} size='2x' />
+                <h1>PillBox</h1>
+            </div>
+            <div className='auth-right'>
+
+                <h1>Create your account</h1>
+                <div className='signup-form'>
+                    <TextField className='auth-input' variant='outlined' placeholder='first name' onChange={e => setFirstname(e.target.value)}/>
+                    <TextField className='auth-input' variant='outlined' placeholder='last name' onChange={e => setLastname(e.target.value)} />
+                    <TextField className='auth-input' variant='outlined' placeholder='email' onChange={e => setEmail(e.target.value)} />
+                    <TextField className='auth-input' variant='outlined' placeholder='password' type='password' onChange={e => setPassword(e.target.value)} />
+                    <div className='auth-btn-cont'>
+                        <Button variant='contained' color='primary' onClick={handleSubmit}>Sign Up</Button> 
+                    </div>
+                </div>
+            </div>
         </div>
     )
 };

@@ -71,7 +71,7 @@ const NewDoseForm = props => {
     let [checked, setChecked] = useState(true)
 
     const handleDateChange = date => {
-      setSelectedDate(date);
+        setSelectedDate(date);
     };    
 
 
@@ -132,7 +132,7 @@ const NewDoseForm = props => {
                 setDosage('')
                 setInstructions('')
                 // props.resetDoses() // is this the right way to do this? I think I need a let [doses, setDoses] = useState([]) somewhere...?
-             })
+            })
         })
     }
  
