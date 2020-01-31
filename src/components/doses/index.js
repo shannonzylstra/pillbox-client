@@ -8,12 +8,12 @@ import './style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPills } from '@fortawesome/free-solid-svg-icons';
 import AddDoseDialogue from '../partials/AddDoseDialogue';
-import AddDoseForm from '../partials/AddDoseForm';
+// import AddDoseForm from '../partials/AddDoseForm';
 
 export const Doses = () => {
     return (
         <div className="doses">
-            <AddDoseForm />
+            <AddDoseDialogue />
         </div>
     )
 }
