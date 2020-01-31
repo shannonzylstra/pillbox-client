@@ -1,10 +1,11 @@
 // dependencies
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+// fontawesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPills } from '@fortawesome/free-solid-svg-icons';
 // material ui
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import { Button, TextField }from '@material-ui/core';
 
 export const SignIn = props => {
     
@@ -50,15 +51,22 @@ export const SignIn = props => {
     }
 
     return (
-        <div className='sign-in'>
-            <Paper className='auth-box'>
-                <form className='auth-form' autoComplete='off'>
-                    <TextField className='auth-input' helperText='email' name='email' onChange={e => setEmail(e.target.value)} />
-                    <TextField className='auth-input' type='password' helperText='password' name='password' onChange={e => setPassword(e.target.value)} />
-                    <br />
-                    <Button className='auth-button' color='primary' onClick={handleSubmit}>Sign Up</Button>
-                </form>
-            </Paper>
+        <div className='auth'>
+            <div className='auth-left'>
+                <FontAwesomeIcon icon={faPills} size='2x' />
+                <h1>PillBox</h1>
+            </div>
+            <div className='auth-right'>
+
+                <h1>Create your account</h1>
+                <div className='signin-form'>
+                    <TextField variant='outlined' placeholder='email' onChange={e => setEmail(e.target.value)} />
+                    <TextField variant='outlined' placeholder='password' type='password' onChange={e => setPassword(e.target.value)} />
+                    <div className='auth-btn-cont'>
+                        <Button variant='contained' color='primary' onClick={handleSubmit}>Sign Up</Button> 
+                    </div>
+                </div>
+            </div>
         </div>
     )
 };

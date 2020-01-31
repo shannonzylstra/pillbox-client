@@ -68,6 +68,8 @@ export const App = () => {
     } else {
         content = (
             <div className='content'>
+                <Nav updateUser={updateUser} user={user} />
+
                 <Route exact path ='/' render={() => <Redirect to='/profile' /> } />
 
                 <Route path='/medication' component={Meds} />
@@ -88,7 +90,6 @@ export const App = () => {
     return (
         <Router>
             <div className='app'>
-                <Nav updateUser={updateUser} user={user} />
                 {content}
             </div>
         </Router>
