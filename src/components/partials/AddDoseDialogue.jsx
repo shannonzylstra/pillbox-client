@@ -62,6 +62,7 @@ function SimpleDialog(props) {
     let [food, setFood] = useState(false)
     let [dosage, setDosage] = useState('')
     let [instructions, setInstructions] = useState('')
+    console.log(props.usermedications)
 
     useEffect(() => {
         setError('')
@@ -136,8 +137,7 @@ function SimpleDialog(props) {
                         id="combo-box" 
                         onChange={(event, value) => setMedication(value ? value.medication._id : '')} 
                         options={props.usermedications} // is this the problem....
-                        // options={[{"_id":"5e3237fff189414cda73768b","brand":"Tylenol with codeine","generic":"acetaminophen w/codeine","image":"/img/tylenol-with-codeine.JPG","link":"http://www.goodrx.com/tylenol-with-codeine","__v":0},{"_id":"5e3237fff189414cda737696","brand":"Zolofot","generic":"sertraline","image":"/img/zoloft.JPG","link":"http://www.goodrx.com/zolofot","__v":0}]}
-                        getOptionsLabel={option => `${option.medication.brand} (${option.generic})`} 
+                        getOptionLabel={option => option ? `${option.medication.brand} (${option.medication.generic})` : 'N/A'} 
                         style={{ width: 500 }} 
                         renderInput={params => (
                             <TextField {...params} label="Your Medications" variant="outlined" fullWidth />
@@ -244,10 +244,6 @@ function SimpleDialog(props) {
                             }
                         />
                     </FormControl>
-                    {/* <FormControl fullWidth>
-                        <InputLabel htmlFor="component-outlined">Condition</InputLabel>
-                        <OutlinedInput id="component-outlined" value={condition} onChange={(e) => setCondition(e.target.value)} label="Condition" fullWidth />
-                    </FormControl> */}
                     <FormControl fullWidth>
                         <Select value={name} onChange={handleNameChange} displayEmpty className={classes.selectEmpty} fullWidth>
                             <MenuItem value="" disabled>
@@ -284,12 +280,11 @@ function SimpleDialog(props) {
                         <TextField
                             id="instructions" 
                             name="instructions" 
-                            value={instructions} 
                             onChange={e => setInstructions(e.target.value)}
                             label="Instructions:"
                             multiline
                             rows="4"
-                            defaultValue="Rx"
+                            defaultValue={instructions} 
                             variant="outlined"
                         />
                     </FormControl>
@@ -334,14 +329,7 @@ export default function AddDoseDialogue() {
         })
         .then(response => response.json())
         .then(result => {
-            // let usermedications = []
-            // result.usermedications.forEach(usermedication => {
-
-            //     medications.push(usermedication.medication)
-            // })
-            // console.log('medications',medications)
-            setUsermedications({ usermedications: result.usermedications })
-            console.log('usermedications', usermedications)
+            setUsermedications(result.usermedications)
         })
         .catch(err => {
             console.log('err', err)
@@ -350,7 +338,7 @@ export default function AddDoseDialogue() {
 
     return (
         <div>
-            <Button variant="outline" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen}>
                 <Avatar className={classes.blueAvatar}>
                     <AddIcon />
                 </Avatar>
