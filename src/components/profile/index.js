@@ -62,8 +62,10 @@ export const Profile = () => {
     const classes = useStyles()
     let [user, setUser] = useState({})
 
-    const handleSubmit = () => {
-        return
+    const handleSubmit = e => {
+        e.preventDefault()
+        // or you can use window.location
+        window.location.href = 'meds'
     }
 
     // Implement useEffect to fetch the user's data
@@ -104,7 +106,7 @@ export const Profile = () => {
                         <Grid item xs={12} sm container>
                             <Grid item xs container direction="column" spacing={2}>
                                 <Grid item xs>
-                                    <Button variant="outlined" onSubmit={handleSubmit}>
+                                    <Button variant="outlined" onClick={handleSubmit}>
                                         <Avatar className={classes.blueAvatar}>
                                         <EditIcon />
                                         </Avatar>
