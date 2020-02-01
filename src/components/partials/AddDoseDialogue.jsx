@@ -47,7 +47,7 @@ function SimpleDialog(props) {
     const classes = useStyles()
     const { close, open } = props
     let [error, setError] = useState('')
-    let [medication, setMedication] = useState('')
+    let [medication, setMedication] = useState({})
     let [days, setDays] = useState({
         M: true,
         T: true,
@@ -62,6 +62,7 @@ function SimpleDialog(props) {
     let [food, setFood] = useState(false)
     let [dosage, setDosage] = useState('')
     let [instructions, setInstructions] = useState('')
+    console.log(props.usermedications)
 
     useEffect(() => {
         setError('')
@@ -134,9 +135,9 @@ function SimpleDialog(props) {
                 <FormControl>
                     <Autocomplete
                         id="combo-box" 
-                        onChange={(event, value) => setMedication(value ? value : '')} 
-                        options={props.medications}
-                        getOptionsLabel={option => `${option.brand} (${option.generic})`} 
+                        onChange={(event, value) => setMedication(value ? value.medication._id : '')} 
+                        options={props.usermedications} // is this the problem....
+                        getOptionLabel={option => option ? `${option.medication.brand} (${option.medication.generic})` : 'N/A'} 
                         style={{ width: 500 }} 
                         renderInput={params => (
                             <TextField {...params} label="Your Medications" variant="outlined" fullWidth />
@@ -243,10 +244,6 @@ function SimpleDialog(props) {
                             }
                         />
                     </FormControl>
-                    {/* <FormControl fullWidth>
-                        <InputLabel htmlFor="component-outlined">Condition</InputLabel>
-                        <OutlinedInput id="component-outlined" value={condition} onChange={(e) => setCondition(e.target.value)} label="Condition" fullWidth />
-                    </FormControl> */}
                     <FormControl fullWidth>
                         <Select value={name} onChange={handleNameChange} displayEmpty className={classes.selectEmpty} fullWidth>
                             <MenuItem value="" disabled>
@@ -283,12 +280,11 @@ function SimpleDialog(props) {
                         <TextField
                             id="instructions" 
                             name="instructions" 
-                            value={instructions} 
                             onChange={e => setInstructions(e.target.value)}
                             label="Instructions:"
                             multiline
                             rows="4"
-                            // defaultValue="Rx"
+                            defaultValue={instructions} 
                             variant="outlined"
                         />
                     </FormControl>
@@ -313,7 +309,7 @@ function SimpleDialog(props) {
 export default function AddDoseDialogue() {
     const classes = useStyles()
     const [open, setOpen] = React.useState(false)
-    const [medications, setMedications] = useState([])
+    const [usermedications, setUsermedications] = useState([])
 
     const handleClickOpen = () => {
         setOpen(true)
@@ -328,18 +324,12 @@ export default function AddDoseDialogue() {
         let token = localStorage.getItem('mernToken')
         fetch(`${process.env.REACT_APP_SERVER_URL}/usermedications`, {
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`
             }
         })
         .then(response => response.json())
         .then(result => {
-            console.log(result)
-            let meds = []
-            result.usermedications.forEach(med => {
-                meds.push(med.brand)
-            })
-            setMedications(meds)
+            setUsermedications(result.usermedications)
         })
         .catch(err => {
             console.log('err', err)
@@ -348,13 +338,13 @@ export default function AddDoseDialogue() {
 
     return (
         <div>
-            <Button variant="outline" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen}>
                 <Avatar className={classes.blueAvatar}>
                     <AddIcon />
                 </Avatar>
                 <span className={classes.blue}>Add Dose</span>
             </Button>
-            <SimpleDialog open={open} close={handleClose} medications={medications} />
+            <SimpleDialog open={open} close={handleClose} usermedications={usermedications} />
         </div>
     )
 }
